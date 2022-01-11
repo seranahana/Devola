@@ -22,6 +22,9 @@ namespace Kaine
         internal static ICaptureDevice captureDevice;
         internal static IReadOnlyList<PcapInterface> Interfaces;
         public static int devIndex { get; set; } = 1;
+        public static int PacketsCacheSize { get; set; } = 20;
+        public static int CheckEntriesInterval { get; set; } = 15;
+        public static bool ApplyStrictCheckRules { get; set; } = false;
         internal static bool ProtectionButtonPressed = false;
         private static readonly Dictionary<string, string> ARPEntries = new Dictionary<string, string>();
         private static readonly Queue<ArpPacket> tre = new Queue<ArpPacket>();
@@ -33,7 +36,15 @@ namespace Kaine
         public StartMenu()
         {
             InitializeComponent();
-            Interfaces = PcapInterface.GetAllPcapInterfaces();
+            try
+            {
+                Interfaces = PcapInterface.GetAllPcapInterfaces();
+            }
+            catch (DllNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message + ". Please, install WinPCap.", "Error", MessageBoxButtons.OK);
+                Application.Exit();
+            }
             FormClosed += new FormClosedEventHandler(OnFormClose);
         }
 
@@ -191,7 +202,7 @@ namespace Kaine
         }
         private void OnPacketArrival (object sender, PacketCapture e)
         {
-            if (CapturedPacketsRaw.Count >= 20)
+            if (CapturedPacketsRaw.Count >= PacketsCacheSize)
             {
                 lock (lockObjQueue)
                 {
@@ -256,17 +267,33 @@ namespace Kaine
             {
                 while (UtilityQueue.Count != 0)
                 {
-                    if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                        && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
-                        && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
-                        && tre.ElementAt(1).Operation == ArpOperation.Response
-                        && tre.ElementAt(2).Operation == ArpOperation.Response
-                        && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
-                        && tre.ElementAt(0).Operation != ArpOperation.Request)
+                    if (ApplyStrictCheckRules)
                     {
-                        OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
-                        SpoofingsSignsFound();
-                        return;
+                        if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
+                            && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
+                            && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
+                            && tre.ElementAt(1).Operation == ArpOperation.Response
+                            && tre.ElementAt(2).Operation == ArpOperation.Response)
+                        {
+                            OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
+                            SpoofingsSignsFound();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
+                            && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
+                            && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
+                            && tre.ElementAt(1).Operation == ArpOperation.Response
+                            && tre.ElementAt(2).Operation == ArpOperation.Response
+                            && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
+                            && tre.ElementAt(0).Operation != ArpOperation.Request)
+                        {
+                            OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
+                            SpoofingsSignsFound();
+                            return;
+                        }
                     }
                     tre.Dequeue();
                     tre.Enqueue(UtilityQueue.Dequeue());
@@ -347,7 +374,7 @@ namespace Kaine
                     OutputText("ARP Spoofing signs have been spotted: Duplicate use of " + cause + " MAC address detected");
                     SpoofingsSignsFound();
                 }
-                Task.Delay(15000).Wait();
+                Task.Delay(CheckEntriesInterval*1000).Wait();
             }
             ARPEntries.Clear();
         }
