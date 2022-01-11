@@ -24,25 +24,25 @@ namespace Kaine
             {
                 try
                 {
-                    comboBox1.Items.Add(Interfaces[i].FriendlyName);
+                    kaineComboBox1.Items.Add(Interfaces[i].FriendlyName);
                 }
                 catch (ArgumentNullException)
                 {
                     try
                     {
-                        comboBox1.Items.Add(Interfaces[i].Description);
+                        kaineComboBox1.Items.Add(Interfaces[i].Description);
                     }
                     catch (ArgumentNullException)
                     {
-                        comboBox1.Items.Add("*Interface Name Unknown*");
+                        kaineComboBox1.Items.Add("*Interface Name Unknown*");
                     }
                 }
             }
-            comboBox1.SelectedIndex = StartMenu.devIndex - 1;
+            kaineComboBox1.SelectedIndex = StartMenu.devIndex - 1;
         }
         private void OKButton_Click(object sender, EventArgs e)
         {
-            StartMenu.devIndex = comboBox1.SelectedIndex + 1;
+            StartMenu.devIndex = kaineComboBox1.SelectedIndex + 1;
             Close();
         }
     }

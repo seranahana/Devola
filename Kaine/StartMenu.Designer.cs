@@ -148,6 +148,7 @@ namespace Kaine
             this.Controls.Add(this.CheckArpCacheButton);
             this.Controls.Add(this.ProtectionButton);
             this.DoubleBuffered = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(100, 50);

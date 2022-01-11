@@ -30,20 +30,30 @@ namespace Kaine
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.kaineComboBox1 = new Kaine.KaineComboBox();
             this.OKButton = new Kaine.TextOnlyButton();
             this.kaineFormStyle1 = new Kaine.KaineFormStyle(this.components);
             this.SuspendLayout();
             // 
-            // comboBox1
+            // kaineComboBox1
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.Black;
-            this.comboBox1.ForeColor = System.Drawing.Color.White;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 48);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(330, 21);
-            this.comboBox1.TabIndex = 0;
+            this.kaineComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.kaineComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.kaineComboBox1.BackColor = System.Drawing.Color.Black;
+            this.kaineComboBox1.BorderColor = System.Drawing.Color.White;
+            this.kaineComboBox1.BorderSize = 1;
+            this.kaineComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.kaineComboBox1.ForeColor = System.Drawing.Color.White;
+            this.kaineComboBox1.IconColor = System.Drawing.Color.White;
+            this.kaineComboBox1.ListBackColor = System.Drawing.Color.Black;
+            this.kaineComboBox1.ListForeColor = System.Drawing.Color.White;
+            this.kaineComboBox1.Location = new System.Drawing.Point(12, 39);
+            this.kaineComboBox1.MinimumSize = new System.Drawing.Size(200, 30);
+            this.kaineComboBox1.Name = "kaineComboBox1";
+            this.kaineComboBox1.Padding = new System.Windows.Forms.Padding(1);
+            this.kaineComboBox1.Size = new System.Drawing.Size(350, 30);
+            this.kaineComboBox1.TabIndex = 2;
+            this.kaineComboBox1.Texts = "";
             // 
             // OKButton
             // 
@@ -78,9 +88,9 @@ namespace Kaine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 150);
+            this.ClientSize = new System.Drawing.Size(390, 150);
+            this.Controls.Add(this.kaineComboBox1);
             this.Controls.Add(this.OKButton);
-            this.Controls.Add(this.comboBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
@@ -98,7 +108,7 @@ namespace Kaine
         #endregion
 
         private KaineFormStyle kaineFormStyle1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private TextOnlyButton OKButton;
+        private KaineComboBox kaineComboBox1;
     }
 }
