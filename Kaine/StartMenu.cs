@@ -486,6 +486,8 @@ namespace Kaine
         }
         private void OutputText (string text)
         {
+            string datetime = DateTime.Now.ToString("HH:mm:ss");
+            text = datetime + " " + text;
             if (richTextBox1.InvokeRequired)
             {
                 richTextBox1.Invoke(new Action<string>(OutputTextUtility), text);
@@ -497,10 +499,7 @@ namespace Kaine
         }
         private void OutputTextUtility(string text)
         {
-            DateTime datetime = DateTime.Now;
-            string time = datetime.TimeOfDay.ToString();
-            time = time.Remove(7, 8);
-            richTextBox1.Text += time + " " + text + Environment.NewLine;
+            richTextBox1.Text += text + Environment.NewLine;
         }
         private void ChangePBText(string text)
         {
