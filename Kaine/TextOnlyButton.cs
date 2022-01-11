@@ -16,15 +16,18 @@ namespace Kaine
         private StringFormat SF = new StringFormat();
         private bool MouseEntered = false;
         private bool MousePressed = false;
+        private Color BaseColor = Color.Black;
+        private Color EnterColor = Color.FromArgb(70, 90, 90, 90);
+        public bool isProtectionButton = false;
         public TextOnlyButton()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor | ControlStyles.UserPaint, true);
             DoubleBuffered = true;
             Size = new Size(100, 20);
             Font = new Font("Verdana", 11F, FontStyle.Regular);
-            BackColor = Color.Transparent;
+            BackColor = Color.Black;
             ForeColor = Color.FromArgb(210, Color.White);
-            SF.Alignment = StringAlignment.Center;
+            SF.Alignment = StringAlignment.Near;
             SF.LineAlignment = StringAlignment.Center;
         }
         protected override void OnPaint(PaintEventArgs e)
@@ -45,29 +48,47 @@ namespace Kaine
             {
                 graph.DrawString(Text, Font, new SolidBrush(Color.FromArgb(150, Color.Black)), rectan, SF);
             }
+            if (isProtectionButton)
+            {
+                if (StartMenu.ProtectionButtonPressed)
+                {
+                    Rectangle rectang = new Rectangle(1, Height - 3, Width - 100, 2);
+                    graph.DrawRectangle(new Pen(Color.FromArgb(150, 255, 0, 255)), rectang);
+                    graph.FillRectangle(new SolidBrush(Color.FromArgb(200, 255, 0, 255)), rectang);
+                    Text = "Stop Protection";
+                }
+                else
+                {
+                    Text = "Start Protection";
+                }
+            }
         }
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
             MouseEntered = true;
+            BackColor = EnterColor;
             Invalidate();
         }
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
             MouseEntered = false;
+            BackColor = BaseColor;
             Invalidate();
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
             MousePressed = false;
+            BackColor = BaseColor;
             Invalidate();
         }
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
             MousePressed = true;
+            BackColor = EnterColor;
             Invalidate();
         }
     }

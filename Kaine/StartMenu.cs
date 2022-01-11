@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -19,13 +20,25 @@ namespace Kaine
 {
     public partial class StartMenu : ShadowedForm
     {
+        #region -- Interfaces--
+
         internal static ICaptureDevice captureDevice;
         internal static IReadOnlyList<PcapInterface> Interfaces;
+
+        #endregion
+
+        #region --Fields--
+
         public static int devIndex { get; set; } = 1;
         public static int PacketsCacheSize { get; set; } = 20;
         public static int CheckEntriesInterval { get; set; } = 15;
         public static bool ApplyStrictCheckRules { get; set; } = false;
+
+        #endregion
+
         internal static bool ProtectionButtonPressed = false;
+        private static bool PathObtained = true;
+        private static string LogPath = "";
         private static readonly Dictionary<string, string> ARPEntries = new Dictionary<string, string>();
         private static readonly Queue<ArpPacket> tre = new Queue<ArpPacket>();
         private static Queue<ArpPacket> UtilityQueue = new Queue<ArpPacket>();
@@ -38,11 +51,21 @@ namespace Kaine
             InitializeComponent();
             try
             {
+                LogPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Logs";
+            }
+            catch (Exception ex)
+            {
+                PathObtained = false;
+                MessageBox.Show(ex.Message + ". Logs will not be created", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            try
+            {
                 Interfaces = PcapInterface.GetAllPcapInterfaces();
             }
             catch (DllNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + ". Please, install WinPCap.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message + ". Please, install WinPCap.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CreateLogEntry(ex.Message + ". Please, install WinPCap.");
                 Application.Exit();
             }
             FormClosed += new FormClosedEventHandler(OnFormClose);
@@ -54,7 +77,6 @@ namespace Kaine
             ProtectionButtonPressed = !ProtectionButtonPressed;
             if (ProtectionButtonPressed)
             {
-                ChangePBText("Stop Protection");
                 tre.Clear();
                 UtilityQueue.Clear();
                 CapturedPacketsRaw.Clear();
@@ -65,8 +87,8 @@ namespace Kaine
                 if (CaptureDeviceList.Instance.Count == 0 && Interfaces.Count == 0)
                 {
                     OutputText("Cannot start module: No network interfaces found!");
-                    ChangePBText("Start Protection");
                     ProtectionButtonPressed = !ProtectionButtonPressed;
+                    ProtectionButton_Click(null, new EventArgs());
                     return;
                 }
                 else
@@ -99,8 +121,9 @@ namespace Kaine
                 catch (Exception ex)
                 {
                     OutputText(ex.Message);
-                    ChangePBText("Start Protection");
+                    CreateLogEntry(ex.Message);
                     ProtectionButtonPressed = !ProtectionButtonPressed;
+                    ProtectionButton_Click(null, new EventArgs());
                     return;
                 }
                 ARPEntries.Clear();
@@ -109,7 +132,6 @@ namespace Kaine
             }
             else
             {
-                ChangePBText("Start Protection");
                 tre.Clear();
                 UtilityQueue.Clear();
                 CapturedPacketsRaw.Clear();
@@ -121,6 +143,7 @@ namespace Kaine
                 catch (Exception ex)
                 {
                     OutputText("Cannot finish capture: " + ex.Message + "Please, try again.");
+                    CreateLogEntry("Cannot finish capture: " + ex.Message + "Please, try again.");
                     return;
                 }
                 captureDevice.Close();
@@ -255,6 +278,7 @@ namespace Kaine
                 catch (Exception ex)
                 {
                     MessageBox.Show("Cannot finish capture: " + ex.Message + ". Please, try again.", "Error", MessageBoxButtons.OK);
+                    CreateLogEntry("Cannot finish capture: " + ex.Message);
                 }
             }
         }
@@ -361,6 +385,21 @@ namespace Kaine
             }
             return false;
         }
+        public static void CheckDir(string path)
+        {
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(path);
+                if (!dir.Exists)
+                {
+                    dir.Create();
+                }
+            }
+            catch 
+            {
+            }
+        }
+
         #endregion
 
         #region --Tasks--
@@ -378,6 +417,7 @@ namespace Kaine
             }
             ARPEntries.Clear();
         }
+
         #endregion
 
         #region --Utilities--
@@ -393,20 +433,7 @@ namespace Kaine
             {
                 OutputText("Cannot disable interface: " + e.Message + ". Manual disabling advised");
             }
-            ChangePBText("Start Protection");
-            ProtectionButtonPressed = !ProtectionButtonPressed;
-            UtilityQueue.Clear();
-            CapturedPacketsRaw.Clear();
-            try
-            {
-                captureDevice.StopCapture();
-            }
-            catch (Exception ex)
-            {
-                OutputText("Cannot finish capture: " + ex.Message);
-                return;
-            }
-            captureDevice.Close();
+            ProtectionButton_Click(null, new EventArgs());
             OutputText("ARP detection module disabled!");
         }
         private void DisableInterface (string interfaceName)
@@ -511,6 +538,24 @@ namespace Kaine
             }
             netshListObtained = true;
         }
+        private static void CreateLogEntry(string entry)
+        {
+            if (PathObtained)
+            {
+                CheckDir(LogPath);
+                string fileName = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "_Logs.txt";
+                try
+                {
+                    System.IO.StreamWriter file = new System.IO.StreamWriter(LogPath + fileName, true);
+                    file.WriteLine(DateTime.Now.ToString() + ": " + entry);
+                    file.Close();
+                }
+                catch (Exception ex) 
+                {
+                    MessageBox.Show("Unable to create log: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
         private void OutputText (string text)
         {
             string datetime = DateTime.Now.ToString("HH:mm:ss");
@@ -527,21 +572,6 @@ namespace Kaine
         private void OutputTextUtility(string text)
         {
             richTextBox1.Text += text + Environment.NewLine;
-        }
-        private void ChangePBText(string text)
-        {
-            if (ProtectionButton.InvokeRequired)
-            {
-                ProtectionButton.Invoke(new Action<string>(ChangePBTextUtility), text);
-            }
-            else
-            {
-                ChangePBTextUtility(text);
-            }
-        }
-        private void ChangePBTextUtility (string text)
-        {
-            ProtectionButton.Text = text;
         }
         #endregion
     }

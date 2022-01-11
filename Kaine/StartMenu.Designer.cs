@@ -50,42 +50,47 @@ namespace Kaine
             this.kaineFormStyle1.FormStyle = Kaine.KaineFormStyle.fStyle.Telegram;
             this.kaineFormStyle1.HeaderColor = System.Drawing.Color.Black;
             this.kaineFormStyle1.HeaderHeight = 20;
+            this.kaineFormStyle1.HeaderHorizontalAlignment = System.Drawing.StringAlignment.Center;
             this.kaineFormStyle1.HeaderImage = null;
             this.kaineFormStyle1.HeaderTextColor = System.Drawing.Color.White;
             this.kaineFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.kaineFormStyle1.HeaderVerticalAlignment = System.Drawing.StringAlignment.Center;
+            this.kaineFormStyle1.ShowMaximizeButton = true;
+            this.kaineFormStyle1.ShowMinimizeButton = true;
             // 
             // ProtectionButton
             // 
-            this.ProtectionButton.BackColor = System.Drawing.Color.Transparent;
+            this.ProtectionButton.BackColor = System.Drawing.Color.Black;
             this.ProtectionButton.Font = new System.Drawing.Font("Verdana", 11F);
             this.ProtectionButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ProtectionButton.Location = new System.Drawing.Point(12, 53);
             this.ProtectionButton.Name = "ProtectionButton";
-            this.ProtectionButton.Size = new System.Drawing.Size(165, 20);
+            this.ProtectionButton.Size = new System.Drawing.Size(217, 30);
             this.ProtectionButton.TabIndex = 0;
             this.ProtectionButton.Text = "Start Protection";
             this.ProtectionButton.Click += new System.EventHandler(this.ProtectionButton_Click);
+            this.ProtectionButton.isProtectionButton = true;
             // 
             // CheckArpCacheButton
             // 
-            this.CheckArpCacheButton.BackColor = System.Drawing.Color.Transparent;
+            this.CheckArpCacheButton.BackColor = System.Drawing.Color.Black;
             this.CheckArpCacheButton.Font = new System.Drawing.Font("Verdana", 11F);
             this.CheckArpCacheButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.CheckArpCacheButton.Location = new System.Drawing.Point(12, 79);
+            this.CheckArpCacheButton.Location = new System.Drawing.Point(12, 89);
             this.CheckArpCacheButton.Name = "CheckArpCacheButton";
-            this.CheckArpCacheButton.Size = new System.Drawing.Size(253, 20);
+            this.CheckArpCacheButton.Size = new System.Drawing.Size(217, 30);
             this.CheckArpCacheButton.TabIndex = 1;
             this.CheckArpCacheButton.Text = "Check Windows ARP Cache";
             this.CheckArpCacheButton.Click += new System.EventHandler(this.CheckArpCacheButton_Click);
             // 
             // AboutButton
             // 
-            this.AboutButton.BackColor = System.Drawing.Color.Transparent;
+            this.AboutButton.BackColor = System.Drawing.Color.Black;
             this.AboutButton.Font = new System.Drawing.Font("Verdana", 11F);
             this.AboutButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.AboutButton.Location = new System.Drawing.Point(11, 157);
+            this.AboutButton.Location = new System.Drawing.Point(12, 161);
             this.AboutButton.Name = "AboutButton";
-            this.AboutButton.Size = new System.Drawing.Size(94, 20);
+            this.AboutButton.Size = new System.Drawing.Size(217, 30);
             this.AboutButton.TabIndex = 2;
             this.AboutButton.Text = "About";
             this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
@@ -99,20 +104,20 @@ namespace Kaine
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Lucida Console", 9F);
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(309, 53);
+            this.richTextBox1.Location = new System.Drawing.Point(235, 53);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(470, 385);
+            this.richTextBox1.Size = new System.Drawing.Size(544, 385);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
             // MinimizeButton
             // 
-            this.MinimizeButton.BackColor = System.Drawing.Color.Transparent;
+            this.MinimizeButton.BackColor = System.Drawing.Color.Black;
             this.MinimizeButton.Font = new System.Drawing.Font("Verdana", 11F);
             this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.MinimizeButton.Location = new System.Drawing.Point(-2, 131);
+            this.MinimizeButton.Location = new System.Drawing.Point(12, 125);
             this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(144, 20);
+            this.MinimizeButton.Size = new System.Drawing.Size(217, 30);
             this.MinimizeButton.TabIndex = 4;
             this.MinimizeButton.Text = "Minimize";
             this.MinimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
@@ -126,12 +131,12 @@ namespace Kaine
             // 
             // SettingsButton
             // 
-            this.SettingsButton.BackColor = System.Drawing.Color.Transparent;
+            this.SettingsButton.BackColor = System.Drawing.Color.Black;
             this.SettingsButton.Font = new System.Drawing.Font("Verdana", 11F);
             this.SettingsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SettingsButton.Location = new System.Drawing.Point(29, 105);
+            this.SettingsButton.Location = new System.Drawing.Point(12, 197);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(156, 20);
+            this.SettingsButton.Size = new System.Drawing.Size(217, 30);
             this.SettingsButton.TabIndex = 5;
             this.SettingsButton.Text = "Advanced Settings";
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
@@ -148,7 +153,6 @@ namespace Kaine
             this.Controls.Add(this.CheckArpCacheButton);
             this.Controls.Add(this.ProtectionButton);
             this.DoubleBuffered = true;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(100, 50);
