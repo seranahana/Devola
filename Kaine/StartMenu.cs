@@ -75,6 +75,7 @@ namespace Kaine
         private void ProtectionButton_Click(object sender, EventArgs e)
         {
             ProtectionButtonPressed = !ProtectionButtonPressed;
+            //Graphics graph = ProtectionButton.CreateGraphics();
             if (ProtectionButtonPressed)
             {
                 tre.Clear();
@@ -88,13 +89,14 @@ namespace Kaine
                 {
                     OutputText("Cannot start module: No network interfaces found!");
                     ProtectionButtonPressed = !ProtectionButtonPressed;
-                    ProtectionButton_Click(null, new EventArgs());
                     return;
                 }
-                else
+                ChooseAdapter ChooseAdapterForm = new ChooseAdapter();
+                if (ChooseAdapterForm.ShowDialog() != DialogResult.OK)
                 {
-                    ChooseAdapter ChooseAdapterForm = new ChooseAdapter();
-                    ChooseAdapterForm.ShowDialog();
+                    OutputText("Cannot start module: Interface not selected");
+                    ProtectionButtonPressed = !ProtectionButtonPressed;
+                    return;
                 }
                 captureDevice = devices[devIndex - 1];
                 captureDevice.OnPacketArrival += new PacketArrivalEventHandler(OnPacketArrival);
@@ -122,7 +124,6 @@ namespace Kaine
                 {
                     OutputText(ex.Message);
                     CreateLogEntry(ex.Message);
-                    ProtectionButtonPressed = !ProtectionButtonPressed;
                     ProtectionButton_Click(null, new EventArgs());
                     return;
                 }
@@ -209,6 +210,8 @@ namespace Kaine
         private void MinimizeButton_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+            MinimizeButton.MouseEntered = false;
+            MinimizeButton.MousePressed = false;
             ShowInTaskbar = false;
             notifyIcon1.Visible = true;
         }
@@ -231,20 +234,29 @@ namespace Kaine
                 {
                     UtilityQueue.Clear();
                     tre.Clear();
-                    UtilityQueue = CapturedPacketsRaw;
+                    while (CapturedPacketsRaw.Count != 0)
+                    {
+                        try
+                        {
+                            UtilityQueue.Enqueue(CapturedPacketsRaw.Dequeue());
+                        }
+                        catch (Exception)
+                        {
+                            break;
+                        }
+                    }
                     while (tre.Count < 3)
                     {
                         try
                         {
                             tre.Enqueue(UtilityQueue.Dequeue());
                         }
-                        catch (ArgumentNullException)
+                        catch (Exception)
                         {
                             break;
                         }
                     }
                 }
-                CapturedPacketsRaw.Clear();
                 Thread CheckQueueThread = new Thread(CheckQueue);
                 CheckQueueThread.Start();
             }
@@ -289,38 +301,41 @@ namespace Kaine
         {
             lock (lockObjQueue)
             {
-                while (UtilityQueue.Count != 0)
+                if (UtilityQueue.Count != 0 && tre.Count == 3)
                 {
-                    if (ApplyStrictCheckRules)
+                    while (UtilityQueue.Count != 0)
                     {
-                        if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                            && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
-                            && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
-                            && tre.ElementAt(1).Operation == ArpOperation.Response
-                            && tre.ElementAt(2).Operation == ArpOperation.Response)
+                        if (ApplyStrictCheckRules)
                         {
-                            OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
-                            SpoofingsSignsFound();
-                            return;
+                            if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
+                                && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
+                                && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
+                                && tre.ElementAt(1).Operation == ArpOperation.Response
+                                && tre.ElementAt(2).Operation == ArpOperation.Response)
+                            {
+                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
+                                SpoofingsSignsFound();
+                                return;
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                            && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
-                            && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
-                            && tre.ElementAt(1).Operation == ArpOperation.Response
-                            && tre.ElementAt(2).Operation == ArpOperation.Response
-                            && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
-                            && tre.ElementAt(0).Operation != ArpOperation.Request)
+                        else
                         {
-                            OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
-                            SpoofingsSignsFound();
-                            return;
+                            if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
+                                && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
+                                && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
+                                && tre.ElementAt(1).Operation == ArpOperation.Response
+                                && tre.ElementAt(2).Operation == ArpOperation.Response
+                                && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
+                                && tre.ElementAt(0).Operation != ArpOperation.Request)
+                            {
+                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
+                                SpoofingsSignsFound();
+                                return;
+                            }
                         }
+                        tre.Dequeue();
+                        tre.Enqueue(UtilityQueue.Dequeue());
                     }
-                    tre.Dequeue();
-                    tre.Enqueue(UtilityQueue.Dequeue());
                 }
             }
         }
@@ -546,7 +561,7 @@ namespace Kaine
                 string fileName = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "_Logs.txt";
                 try
                 {
-                    System.IO.StreamWriter file = new System.IO.StreamWriter(LogPath + fileName, true);
+                    StreamWriter file = new StreamWriter(LogPath + fileName, true);
                     file.WriteLine(DateTime.Now.ToString() + ": " + entry);
                     file.Close();
                 }

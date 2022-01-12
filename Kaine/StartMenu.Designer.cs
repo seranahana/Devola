@@ -65,7 +65,7 @@ namespace Kaine
             this.ProtectionButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ProtectionButton.Location = new System.Drawing.Point(12, 53);
             this.ProtectionButton.Name = "ProtectionButton";
-            this.ProtectionButton.Size = new System.Drawing.Size(217, 30);
+            this.ProtectionButton.Size = new System.Drawing.Size(217, 33);
             this.ProtectionButton.TabIndex = 0;
             this.ProtectionButton.Text = "Start Protection";
             this.ProtectionButton.Click += new System.EventHandler(this.ProtectionButton_Click);
@@ -78,7 +78,7 @@ namespace Kaine
             this.CheckArpCacheButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.CheckArpCacheButton.Location = new System.Drawing.Point(12, 89);
             this.CheckArpCacheButton.Name = "CheckArpCacheButton";
-            this.CheckArpCacheButton.Size = new System.Drawing.Size(217, 30);
+            this.CheckArpCacheButton.Size = new System.Drawing.Size(217, 33);
             this.CheckArpCacheButton.TabIndex = 1;
             this.CheckArpCacheButton.Text = "Check Windows ARP Cache";
             this.CheckArpCacheButton.Click += new System.EventHandler(this.CheckArpCacheButton_Click);
@@ -90,7 +90,7 @@ namespace Kaine
             this.AboutButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.AboutButton.Location = new System.Drawing.Point(12, 161);
             this.AboutButton.Name = "AboutButton";
-            this.AboutButton.Size = new System.Drawing.Size(217, 30);
+            this.AboutButton.Size = new System.Drawing.Size(217, 33);
             this.AboutButton.TabIndex = 2;
             this.AboutButton.Text = "About";
             this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
@@ -117,7 +117,7 @@ namespace Kaine
             this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.MinimizeButton.Location = new System.Drawing.Point(12, 125);
             this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(217, 30);
+            this.MinimizeButton.Size = new System.Drawing.Size(217, 33);
             this.MinimizeButton.TabIndex = 4;
             this.MinimizeButton.Text = "Minimize";
             this.MinimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
@@ -136,7 +136,7 @@ namespace Kaine
             this.SettingsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.SettingsButton.Location = new System.Drawing.Point(12, 197);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(217, 30);
+            this.SettingsButton.Size = new System.Drawing.Size(217, 33);
             this.SettingsButton.TabIndex = 5;
             this.SettingsButton.Text = "Advanced Settings";
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);

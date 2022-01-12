@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,10 +15,11 @@ namespace Kaine
     public class TextOnlyButton : Control
     {
         private StringFormat SF = new StringFormat();
-        private bool MouseEntered = false;
-        private bool MousePressed = false;
+        public bool MouseEntered = false;
+        public bool MousePressed = false;
         private Color BaseColor = Color.Black;
         private Color EnterColor = Color.FromArgb(70, 90, 90, 90);
+        private SizeF TextSize;
         public bool isProtectionButton = false;
         public TextOnlyButton()
         {
@@ -34,6 +36,7 @@ namespace Kaine
         {
             base.OnPaint(e);
             Graphics graph = e.Graphics;
+            TextSize = graph.MeasureString(Text, Font);
             graph.SmoothingMode = SmoothingMode.HighQuality;
             graph.Clear(Parent.BackColor);
             Rectangle rectan = new Rectangle(0, 0, Width - 1, Height - 1);
@@ -43,18 +46,24 @@ namespace Kaine
             if (MouseEntered)
             {
                 graph.DrawString(Text, Font, new SolidBrush(Color.White), rectan, SF);
+                Rectangle rectang = new Rectangle(1, Height - 3, (int)TextSize.Width - 2, 2);
+                graph.DrawRectangle(new Pen(Color.FromArgb(150, 255, 0, 255)), rectang);
+                graph.FillRectangle(new SolidBrush(Color.FromArgb(200, 255, 0, 255)), rectang);
             }
             if (MousePressed)
             {
                 graph.DrawString(Text, Font, new SolidBrush(Color.FromArgb(150, Color.Black)), rectan, SF);
+                Rectangle rectang = new Rectangle(1, Height - 3, (int)TextSize.Width - 2, 2);
+                graph.DrawRectangle(new Pen(Color.FromArgb(200, 255, 0, 255)), rectang);
+                graph.FillRectangle(new SolidBrush(Color.FromArgb(250, 255, 0, 255)), rectang);
             }
             if (isProtectionButton)
             {
                 if (StartMenu.ProtectionButtonPressed)
                 {
-                    Rectangle rectang = new Rectangle(1, Height - 3, Width - 100, 2);
-                    graph.DrawRectangle(new Pen(Color.FromArgb(150, 255, 0, 255)), rectang);
-                    graph.FillRectangle(new SolidBrush(Color.FromArgb(200, 255, 0, 255)), rectang);
+                    Rectangle rectang = new Rectangle(1, Height - 3, (int)TextSize.Width - 2, 2);
+                    graph.DrawRectangle(new Pen(Color.FromArgb(200, 255, 0, 255)), rectang);
+                    graph.FillRectangle(new SolidBrush(Color.FromArgb(250, 255, 0, 255)), rectang);
                     Text = "Stop Protection";
                 }
                 else
