@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Windows.Forms;
+
 namespace Kaine
 {
     partial class SettingsForm
@@ -145,7 +148,7 @@ namespace Kaine
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 7F);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(100, 245);
+            this.label4.Location = new System.Drawing.Point(100, 238);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(427, 12);
             this.label4.TabIndex = 6;
@@ -169,6 +172,7 @@ namespace Kaine
             this.MinimumSize = new System.Drawing.Size(100, 50);
             this.Name = "SettingsForm";
             this.MaximizeBox = false;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.SettingsForm_OnPaint);
             this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -181,6 +181,7 @@ namespace Kaine
             this.MinimumSize = new System.Drawing.Size(100, 50);
             this.Name = "AboutForm";
             this.MaximizeBox = false;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AboutForm_OnPaint);
             this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
