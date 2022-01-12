@@ -31,8 +31,8 @@ namespace Kaine
         {
             this.components = new System.ComponentModel.Container();
             this.kaineComboBox1 = new Kaine.KaineComboBox();
-            this.OKButton = new Kaine.TextOnlyButton();
             this.kaineFormStyle1 = new Kaine.KaineFormStyle(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // kaineComboBox1
@@ -55,18 +55,6 @@ namespace Kaine
             this.kaineComboBox1.TabIndex = 2;
             this.kaineComboBox1.Texts = "";
             // 
-            // OKButton
-            // 
-            this.OKButton.BackColor = System.Drawing.Color.Transparent;
-            this.OKButton.Font = new System.Drawing.Font("Verdana", 11F);
-            this.OKButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.OKButton.Location = new System.Drawing.Point(157, 75);
-            this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(40, 20);
-            this.OKButton.TabIndex = 1;
-            this.OKButton.Text = "OK";
-            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
-            // 
             // kaineFormStyle1
             // 
             this.kaineFormStyle1.AllowUserResize = false;
@@ -84,13 +72,25 @@ namespace Kaine
             this.kaineFormStyle1.ShowMaximizeButton = false;
             this.kaineFormStyle1.ShowMinimizeButton = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 11F);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(167, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 40);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "OK";
+            this.label1.Click += new System.EventHandler(this.OKButton_Click);
+            // 
             // ChooseAdapter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 150);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.kaineComboBox1);
-            this.Controls.Add(this.OKButton);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
@@ -100,15 +100,18 @@ namespace Kaine
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Choose network interface";
+            this.Text = "Select network interface";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChooseAdapter_FormClosing);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ChooseAdapter_OnPaint);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private KaineFormStyle kaineFormStyle1;
-        private TextOnlyButton OKButton;
         private KaineComboBox kaineComboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
