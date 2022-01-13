@@ -30,7 +30,7 @@ namespace Kaine
         #region --Fields--
 
         public static int devIndex { get; set; } = 1;
-        public static int PacketsCacheSize { get; set; } = 20;
+        public static int PacketsCacheSize { get; set; } = 10;
         public static int CheckEntriesInterval { get; set; } = 15;
         public static bool ApplyStrictCheckRules { get; set; } = false;
 
@@ -75,7 +75,8 @@ namespace Kaine
         private void ProtectionButton_Click(object sender, EventArgs e)
         {
             ProtectionButtonPressed = !ProtectionButtonPressed;
-            //Graphics graph = ProtectionButton.CreateGraphics();
+            ProtectionButton.MousePressed = false;
+            ProtectionButton.Invalidate();
             if (ProtectionButtonPressed)
             {
                 tre.Clear();
@@ -213,18 +214,27 @@ namespace Kaine
             MinimizeButton.MouseEntered = false;
             MinimizeButton.MousePressed = false;
             ShowInTaskbar = false;
-            notifyIcon1.Visible = true;
         }
         private void notifyIcon1_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
             ShowInTaskbar = true;
-            notifyIcon1.Visible = false;
         }
         private void SettingsButton_Click(object sender, EventArgs e)
         {
             SettingsForm settingsForm = new SettingsForm();
             settingsForm.Show();
+        }
+        private void StartMenu_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                notifyIcon1.Visible = true;
+            }
+            else
+            {
+                notifyIcon1.Visible = false;
+            }
         }
         private void OnPacketArrival (object sender, PacketCapture e)
         {
@@ -308,12 +318,11 @@ namespace Kaine
                         if (ApplyStrictCheckRules)
                         {
                             if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                                && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
                                 && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
                                 && tre.ElementAt(1).Operation == ArpOperation.Response
                                 && tre.ElementAt(2).Operation == ArpOperation.Response)
                             {
-                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
+                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + " detected");
                                 SpoofingsSignsFound();
                                 return;
                             }
@@ -321,14 +330,13 @@ namespace Kaine
                         else
                         {
                             if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                                && tre.ElementAt(1).TargetHardwareAddress.ToString() == tre.ElementAt(2).TargetHardwareAddress.ToString()
                                 && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
                                 && tre.ElementAt(1).Operation == ArpOperation.Response
                                 && tre.ElementAt(2).Operation == ArpOperation.Response
                                 && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
                                 && tre.ElementAt(0).Operation != ArpOperation.Request)
                             {
-                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + "detected");
+                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + " detected");
                                 SpoofingsSignsFound();
                                 return;
                             }
@@ -449,7 +457,7 @@ namespace Kaine
                 OutputText("Cannot disable interface: " + e.Message + ". Manual disabling advised");
             }
             ProtectionButton_Click(null, new EventArgs());
-            OutputText("ARP detection module disabled!");
+            ProtectionButton.Invalidate();
         }
         private void DisableInterface (string interfaceName)
         {
