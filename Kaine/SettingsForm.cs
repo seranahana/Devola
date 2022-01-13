@@ -22,13 +22,13 @@ namespace Kaine
             }
             switch (StartMenu.PacketsCacheSize)
             {
-                case 20:
+                case 10:
                     kaineComboBox1.SelectedIndex = 0;
                     break;
-                case 50:
+                case 40:
                     kaineComboBox1.SelectedIndex = 1;
                     break;
-                case 80:
+                case 70:
                     kaineComboBox1.SelectedIndex = 2;
                     break;
             }
@@ -37,6 +37,7 @@ namespace Kaine
                 kaineComboBox2.Items.Add(i);
             }
             kaineComboBox2.SelectedIndex = StartMenu.CheckEntriesInterval - 1;
+            checkBox1.Checked = StartMenu.ApplyStrictCheckRules;
         }
 
         private void kaineComboBox1_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -44,13 +45,13 @@ namespace Kaine
             switch (kaineComboBox1.SelectedIndex)
             {
                 case 0:
-                    StartMenu.PacketsCacheSize = 20;
+                    StartMenu.PacketsCacheSize = 10;
                     break;
                 case 1:
-                    StartMenu.PacketsCacheSize = 50;
+                    StartMenu.PacketsCacheSize = 40;
                     break;
                 case 2:
-                    StartMenu.PacketsCacheSize = 80;
+                    StartMenu.PacketsCacheSize = 70;
                     break;
             }
             
