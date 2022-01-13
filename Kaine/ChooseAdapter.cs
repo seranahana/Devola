@@ -13,7 +13,7 @@ using PacketDotNet;
 
 namespace Kaine
 {
-    public partial class ChooseAdapter : Form
+    public partial class ChooseAdapter : ShadowedForm
     {
         public static bool ClosedWithOKButton;
         internal static IReadOnlyList<PcapInterface> Interfaces;
