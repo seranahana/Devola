@@ -16,14 +16,14 @@ using SharpPcap;
 using SharpPcap.LibPcap;
 using PacketDotNet;
 
-namespace Kaine
+namespace Devola
 {
     public partial class StartMenu : ShadowedForm
     {
         #region -- Interfaces--
 
-        internal static ICaptureDevice captureDevice;
-        internal static IReadOnlyList<PcapInterface> Interfaces;
+        private static ICaptureDevice captureDevice;
+        private static IReadOnlyList<PcapInterface> Interfaces;
 
         #endregion
 
@@ -40,8 +40,6 @@ namespace Kaine
         private static bool PathObtained = true;
         private static string LogPath = "";
         private static readonly Dictionary<string, string> ARPEntries = new Dictionary<string, string>();
-        private static readonly Queue<ArpPacket> tre = new Queue<ArpPacket>();
-        private static Queue<ArpPacket> UtilityQueue = new Queue<ArpPacket>();
         private static readonly Queue<ArpPacket> CapturedPacketsRaw = new Queue<ArpPacket>();
         private static readonly List<string> netshInterfaceList = new List<string>();
         private readonly object lockObjQueue = new object();
@@ -79,8 +77,6 @@ namespace Kaine
             ProtectionButton.Invalidate();
             if (ProtectionButtonPressed)
             {
-                tre.Clear();
-                UtilityQueue.Clear();
                 CapturedPacketsRaw.Clear();
                 OutputText("Starting ARP detection module...");
                 OutputText("Loading list of device interfaces...");
@@ -92,7 +88,7 @@ namespace Kaine
                     ProtectionButtonPressed = !ProtectionButtonPressed;
                     return;
                 }
-                ChooseAdapter ChooseAdapterForm = new ChooseAdapter();
+                SelectAdapter ChooseAdapterForm = new SelectAdapter();
                 if (ChooseAdapterForm.ShowDialog() != DialogResult.OK)
                 {
                     OutputText("Cannot start module: Interface not selected");
@@ -134,8 +130,6 @@ namespace Kaine
             }
             else
             {
-                tre.Clear();
-                UtilityQueue.Clear();
                 CapturedPacketsRaw.Clear();
                 ARPEntries.Clear();
                 try
@@ -240,33 +234,6 @@ namespace Kaine
         {
             if (CapturedPacketsRaw.Count >= PacketsCacheSize)
             {
-                lock (lockObjQueue)
-                {
-                    UtilityQueue.Clear();
-                    tre.Clear();
-                    while (CapturedPacketsRaw.Count != 0)
-                    {
-                        try
-                        {
-                            UtilityQueue.Enqueue(CapturedPacketsRaw.Dequeue());
-                        }
-                        catch (Exception)
-                        {
-                            break;
-                        }
-                    }
-                    while (tre.Count < 3)
-                    {
-                        try
-                        {
-                            tre.Enqueue(UtilityQueue.Dequeue());
-                        }
-                        catch (Exception)
-                        {
-                            break;
-                        }
-                    }
-                }
                 Thread CheckQueueThread = new Thread(CheckQueue);
                 CheckQueueThread.Start();
             }
@@ -275,15 +242,16 @@ namespace Kaine
             ArpPacket ARPPack = packet.Extract<ArpPacket>();
             if (ARPPack != null)
             {
-                CapturedPacketsRaw.Enqueue(ARPPack);
+                lock (lockObjQueue)
+                {
+                    CapturedPacketsRaw.Enqueue(ARPPack);
+                }
                 if (ARPPack.Operation == ArpOperation.Response)
                 {
                     lock (lockObjDict)
                     {
-                        if (!ARPEntries.Remove(ARPPack.SenderProtocolAddress.ToString()))
-                        {
-                            ARPEntries.Add(ARPPack.SenderProtocolAddress.ToString(), ARPPack.SenderHardwareAddress.ToString());
-                        }
+                        ARPEntries.Remove(ARPPack.SenderProtocolAddress.ToString());
+                        ARPEntries.Add(ARPPack.SenderProtocolAddress.ToString(), ARPPack.SenderHardwareAddress.ToString());
                     }
                 }
             }
@@ -309,41 +277,69 @@ namespace Kaine
         #region --Check Methods--
         private void CheckQueue()
         {
+            Queue<ArpPacket> UtilityQueue = new Queue<ArpPacket>();
+            Queue<ArpPacket> tre = new Queue<ArpPacket>();
             lock (lockObjQueue)
             {
-                if (UtilityQueue.Count != 0 && tre.Count == 3)
+                while (CapturedPacketsRaw.Count != 0)
                 {
-                    while (UtilityQueue.Count != 0)
+                    try
                     {
-                        if (ApplyStrictCheckRules)
-                        {
-                            if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                                && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
-                                && tre.ElementAt(1).Operation == ArpOperation.Response
-                                && tre.ElementAt(2).Operation == ArpOperation.Response)
-                            {
-                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + " detected");
-                                SpoofingsSignsFound();
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
-                                && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
-                                && tre.ElementAt(1).Operation == ArpOperation.Response
-                                && tre.ElementAt(2).Operation == ArpOperation.Response
-                                && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
-                                && tre.ElementAt(0).Operation != ArpOperation.Request)
-                            {
-                                OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + " detected");
-                                SpoofingsSignsFound();
-                                return;
-                            }
-                        }
-                        tre.Dequeue();
-                        tre.Enqueue(UtilityQueue.Dequeue());
+                        UtilityQueue.Enqueue(CapturedPacketsRaw.Dequeue());
                     }
+                    catch (Exception)
+                    {
+                        break;
+                    }
+                }
+            }
+            while (tre.Count < 3)
+            {
+                try
+                {
+                    tre.Enqueue(UtilityQueue.Dequeue());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+            while (UtilityQueue.Count != 0)
+            {
+                if (ApplyStrictCheckRules)
+                {
+                    if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
+                        && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
+                        && tre.ElementAt(1).Operation == ArpOperation.Response
+                        && tre.ElementAt(2).Operation == ArpOperation.Response)
+                    {
+                        OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + " detected");
+                        SpoofingsSignsFound();
+                        return;
+                    }
+                }
+                else
+                {
+                    if (tre.ElementAt(1).SenderHardwareAddress.ToString() == tre.ElementAt(2).SenderHardwareAddress.ToString()
+                        && tre.ElementAt(1).Operation == tre.ElementAt(2).Operation
+                        && tre.ElementAt(1).Operation == ArpOperation.Response
+                        && tre.ElementAt(2).Operation == ArpOperation.Response
+                        && tre.ElementAt(0).SenderHardwareAddress.ToString() != tre.ElementAt(1).TargetHardwareAddress.ToString()
+                        && tre.ElementAt(0).Operation != ArpOperation.Request)
+                    {
+                        OutputText("ARP Spoofing signs have been spotted: Multiple responses from " + tre.ElementAt(1).SenderHardwareAddress.ToString() + " detected");
+                        SpoofingsSignsFound();
+                        return;
+                    }
+                }
+                try
+                {
+                    tre.Dequeue();
+                    tre.Enqueue(UtilityQueue.Dequeue());
+                }
+                catch (Exception)
+                {
+                    break;
                 }
             }
         }
@@ -408,7 +404,7 @@ namespace Kaine
             }
             return false;
         }
-        public static void CheckDir(string path)
+        private static void CheckDir(string path)
         {
             try
             {

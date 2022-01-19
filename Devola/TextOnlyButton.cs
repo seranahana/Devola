@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kaine
+namespace Devola
 {
     public class TextOnlyButton : Control
     {

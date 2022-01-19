@@ -11,13 +11,13 @@ using SharpPcap;
 using SharpPcap.LibPcap;
 using PacketDotNet;
 
-namespace Kaine
+namespace Devola
 {
-    public partial class ChooseAdapter : ShadowedForm
+    public partial class SelectAdapter : ShadowedForm
     {
         public static bool ClosedWithOKButton;
         internal static IReadOnlyList<PcapInterface> Interfaces;
-        public ChooseAdapter()
+        public SelectAdapter()
         {
             InitializeComponent();
             Invalidate();
@@ -27,29 +27,29 @@ namespace Kaine
             {
                 try
                 {
-                    kaineComboBox1.Items.Add(Interfaces[i].FriendlyName);
+                    devolaComboBox1.Items.Add(Interfaces[i].FriendlyName);
                 }
                 catch (ArgumentNullException)
                 {
                     try
                     {
-                        kaineComboBox1.Items.Add(Interfaces[i].Description);
+                        devolaComboBox1.Items.Add(Interfaces[i].Description);
                     }
                     catch (ArgumentNullException)
                     {
-                        kaineComboBox1.Items.Add("*Interface Name Unknown*");
+                        devolaComboBox1.Items.Add("*Interface Name Unknown*");
                     }
                 }
             }
-            kaineComboBox1.SelectedIndex = StartMenu.devIndex - 1;
+            devolaComboBox1.SelectedIndex = StartMenu.devIndex - 1;
         }
         private void OKButton_Click(object sender, EventArgs e)
         {
-            StartMenu.devIndex = kaineComboBox1.SelectedIndex + 1;
+            StartMenu.devIndex = devolaComboBox1.SelectedIndex + 1;
             ClosedWithOKButton = true;
             Close();
         }
-        private void ChooseAdapter_FormClosing(object sender, FormClosingEventArgs e)
+        private void SelectAdapter_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ClosedWithOKButton)
             {
@@ -61,7 +61,7 @@ namespace Kaine
             }
         }
         // Border
-        private void ChooseAdapter_OnPaint(object sender, PaintEventArgs e)
+        private void SelectAdapter_OnPaint(object sender, PaintEventArgs e)
         {
             // Left side
             Graphics graph = e.Graphics;

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharpPcap;
 
-namespace Kaine
+namespace Devola
 {
     static class Program
     {

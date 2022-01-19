@@ -1,5 +1,5 @@
 ﻿
-namespace Kaine
+namespace Devola
 {
     partial class StartMenu
     {
@@ -31,32 +31,32 @@ namespace Kaine
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartMenu));
-            this.kaineFormStyle1 = new Kaine.KaineFormStyle(this.components);
-            this.ProtectionButton = new Kaine.TextOnlyButton();
-            this.CheckArpCacheButton = new Kaine.TextOnlyButton();
-            this.AboutButton = new Kaine.TextOnlyButton();
+            this.devolaFormStyle1 = new Devola.DevolaFormStyle(this.components);
+            this.ProtectionButton = new Devola.TextOnlyButton();
+            this.CheckArpCacheButton = new Devola.TextOnlyButton();
+            this.AboutButton = new Devola.TextOnlyButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.MinimizeButton = new Kaine.TextOnlyButton();
+            this.MinimizeButton = new Devola.TextOnlyButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.SettingsButton = new Kaine.TextOnlyButton();
+            this.SettingsButton = new Devola.TextOnlyButton();
             this.SuspendLayout();
             // 
-            // kaineFormStyle1
+            // devolaFormStyle1
             // 
-            this.kaineFormStyle1.AllowUserResize = true;
-            this.kaineFormStyle1.BackColor = System.Drawing.Color.Black;
-            this.kaineFormStyle1.ControlBoxButtonsWidth = 24;
-            this.kaineFormStyle1.Form = this;
-            this.kaineFormStyle1.FormStyle = Kaine.KaineFormStyle.fStyle.Telegram;
-            this.kaineFormStyle1.HeaderColor = System.Drawing.Color.Black;
-            this.kaineFormStyle1.HeaderHeight = 20;
-            this.kaineFormStyle1.HeaderHorizontalAlignment = System.Drawing.StringAlignment.Center;
-            this.kaineFormStyle1.HeaderImage = null;
-            this.kaineFormStyle1.HeaderTextColor = System.Drawing.Color.White;
-            this.kaineFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.kaineFormStyle1.HeaderVerticalAlignment = System.Drawing.StringAlignment.Center;
-            this.kaineFormStyle1.ShowMaximizeButton = true;
-            this.kaineFormStyle1.ShowMinimizeButton = true;
+            this.devolaFormStyle1.AllowUserResize = true;
+            this.devolaFormStyle1.BackColor = System.Drawing.Color.Black;
+            this.devolaFormStyle1.ControlBoxButtonsWidth = 24;
+            this.devolaFormStyle1.Form = this;
+            this.devolaFormStyle1.FormStyle = Devola.DevolaFormStyle.fStyle.Telegram;
+            this.devolaFormStyle1.HeaderColor = System.Drawing.Color.Black;
+            this.devolaFormStyle1.HeaderHeight = 20;
+            this.devolaFormStyle1.HeaderHorizontalAlignment = System.Drawing.StringAlignment.Center;
+            this.devolaFormStyle1.HeaderImage = null;
+            this.devolaFormStyle1.HeaderTextColor = System.Drawing.Color.White;
+            this.devolaFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.devolaFormStyle1.HeaderVerticalAlignment = System.Drawing.StringAlignment.Center;
+            this.devolaFormStyle1.ShowMaximizeButton = true;
+            this.devolaFormStyle1.ShowMinimizeButton = true;
             // 
             // ProtectionButton
             // 
@@ -69,7 +69,6 @@ namespace Kaine
             this.ProtectionButton.TabIndex = 0;
             this.ProtectionButton.Text = "Start Protection";
             this.ProtectionButton.Click += new System.EventHandler(this.ProtectionButton_Click);
-            this.ProtectionButton.isProtectionButton = true;
             // 
             // CheckArpCacheButton
             // 
@@ -125,7 +124,7 @@ namespace Kaine
             // notifyIcon1
             // 
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "Kainé";
+            this.notifyIcon1.Text = "Devola";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
             // 
@@ -157,15 +156,15 @@ namespace Kaine
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(100, 50);
             this.Name = "StartMenu";
+            this.Text = "Devola";
             this.Resize += new System.EventHandler(this.StartMenu_Resize);
-            this.Text = "Kainé";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private KaineFormStyle kaineFormStyle1;
+        private DevolaFormStyle devolaFormStyle1;
         private TextOnlyButton ProtectionButton;
         private TextOnlyButton CheckArpCacheButton;
         private TextOnlyButton AboutButton;

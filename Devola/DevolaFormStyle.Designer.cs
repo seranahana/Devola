@@ -1,7 +1,7 @@
 ﻿
-namespace Kaine
+namespace Devola
 {
-    partial class KaineFormStyle
+    partial class DevolaFormStyle
     {
         /// <summary>
         /// Обязательная переменная конструктора.

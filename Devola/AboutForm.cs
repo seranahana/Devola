@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace Kaine
+namespace Devola
 {
     public partial class AboutForm : ShadowedForm
     {

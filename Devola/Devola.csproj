@@ -6,14 +6,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{381A1D5B-C110-401F-8E0D-EB878E41A8A3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Kaine</RootNamespace>
-    <AssemblyName>Kaine</AssemblyName>
+    <RootNamespace>Devola</RootNamespace>
+    <AssemblyName>Devola</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Templar Assassin\Amy\Emilee\Kaine\</PublishUrl>
+    <PublishUrl>D:\Templar Assassin\Amy\Emilee\Devola\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -54,10 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>kaine_narrow_icon_Ryb_icon.ico</ApplicationIcon>
+    <ApplicationIcon>devola_and_popola_art_icon_Z1m_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Kaine.Program</StartupObject>
+    <StartupObject>Devola.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>B2121E77DEE059647FB7BB2A7454EB26851ACACF</ManifestCertificateThumbprint>
@@ -127,11 +127,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChooseAdapter.cs">
+    <Compile Include="SelectAdapter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChooseAdapter.Designer.cs">
-      <DependentUpon>ChooseAdapter.cs</DependentUpon>
+    <Compile Include="SelectAdapter.Designer.cs">
+      <DependentUpon>SelectAdapter.cs</DependentUpon>
     </Compile>
     <Compile Include="FlatColors.cs" />
     <Compile Include="AboutForm.cs">
@@ -140,17 +140,17 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="KaineComboBox.cs">
+    <Compile Include="DevolaComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="KaineComboBox.Designer.cs">
-      <DependentUpon>KaineComboBox.cs</DependentUpon>
+    <Compile Include="DevolaComboBox.Designer.cs">
+      <DependentUpon>DevolaComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="KaineFormStyle.cs">
+    <Compile Include="DevolaFormStyle.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="KaineFormStyle.Designer.cs">
-      <DependentUpon>KaineFormStyle.cs</DependentUpon>
+    <Compile Include="DevolaFormStyle.Designer.cs">
+      <DependentUpon>DevolaFormStyle.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
@@ -178,8 +178,8 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChooseAdapter.resx">
-      <DependentUpon>ChooseAdapter.cs</DependentUpon>
+    <EmbeddedResource Include="SelectAdapter.resx">
+      <DependentUpon>SelectAdapter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -189,6 +189,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -196,7 +197,6 @@
     <EmbeddedResource Include="StartMenu.resx">
       <DependentUpon>StartMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Kaine_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -213,7 +213,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="kaine_narrow_icon_Ryb_icon.ico" />
+    <Content Include="devola_and_popola_art_icon_Z1m_icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

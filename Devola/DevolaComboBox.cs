@@ -10,10 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kaine
+namespace Devola
 {
     [DefaultEvent("OnSelectedIndexChanged")]
-    public partial class KaineComboBox : UserControl
+    public partial class DevolaComboBox : UserControl
     {
         private Color backColor = Color.Black;
         private Color iconColor = Color.White;
@@ -253,7 +253,7 @@ namespace Kaine
 
         public event EventHandler OnSelectedIndexChanged; // Default Event
 
-        public KaineComboBox()
+        public DevolaComboBox()
         {
             comboBox = new ComboBox();
             dropdownText = new Label();

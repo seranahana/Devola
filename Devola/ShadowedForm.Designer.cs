@@ -1,5 +1,5 @@
 ﻿
-namespace Kaine
+namespace Devola
 {
     partial class ShadowedForm
     {

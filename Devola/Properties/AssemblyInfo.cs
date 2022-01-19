@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("Kaine")]
+[assembly: AssemblyTitle("Devola")]
 [assembly: AssemblyDescription("ARP Spoofing Detection Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Kaine")]
+[assembly: AssemblyProduct("Devola")]
 [assembly: AssemblyCopyright("Copyright Serana Hana ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -8,41 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kaine
+namespace Devola
 {
     public partial class SettingsForm : ShadowedForm
     {
-        private static readonly List<string> NetworkScaleDictionary = new List<string>() { "Small-scale", "Medium-scale", "Large-scale" };
         public SettingsForm()
         {
             InitializeComponent();
+            List<string> NetworkScaleDictionary = new List<string>() { "Small-scale", "Medium-scale", "Large-scale" };
             for (int i = 0; i < 3; i++)
             {
-                kaineComboBox1.Items.Add(NetworkScaleDictionary[i]);
+                devolaComboBox1.Items.Add(NetworkScaleDictionary[i]);
             }
             switch (StartMenu.PacketsCacheSize)
             {
                 case 10:
-                    kaineComboBox1.SelectedIndex = 0;
+                    devolaComboBox1.SelectedIndex = 0;
                     break;
                 case 40:
-                    kaineComboBox1.SelectedIndex = 1;
+                    devolaComboBox1.SelectedIndex = 1;
                     break;
                 case 70:
-                    kaineComboBox1.SelectedIndex = 2;
+                    devolaComboBox1.SelectedIndex = 2;
                     break;
             }
             for (int i = 1; i < 61; i++)
             {
-                kaineComboBox2.Items.Add(i);
+                devolaComboBox2.Items.Add(i);
             }
-            kaineComboBox2.SelectedIndex = StartMenu.CheckEntriesInterval - 1;
+            devolaComboBox2.SelectedIndex = StartMenu.CheckEntriesInterval - 1;
             checkBox1.Checked = StartMenu.ApplyStrictCheckRules;
         }
 
-        private void kaineComboBox1_OnSelectedIndexChanged(object sender, EventArgs e)
+        private void devolaComboBox1_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (kaineComboBox1.SelectedIndex)
+            switch (devolaComboBox1.SelectedIndex)
             {
                 case 0:
                     StartMenu.PacketsCacheSize = 10;
@@ -56,9 +56,9 @@ namespace Kaine
             }
             
         }
-        private void kaineComboBox2_OnSelectedIndexChanged(object sender, EventArgs e)
+        private void devolaComboBox2_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            StartMenu.CheckEntriesInterval = kaineComboBox2.SelectedIndex + 1;
+            StartMenu.CheckEntriesInterval = devolaComboBox2.SelectedIndex + 1;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

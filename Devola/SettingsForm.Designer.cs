@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Kaine
+namespace Devola
 {
     partial class SettingsForm
     {
@@ -34,32 +34,32 @@ namespace Kaine
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.kaineFormStyle1 = new Kaine.KaineFormStyle(this.components);
+            this.devolaFormStyle1 = new Devola.DevolaFormStyle(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.kaineComboBox1 = new Kaine.KaineComboBox();
+            this.devolaComboBox1 = new Devola.DevolaComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.kaineComboBox2 = new Kaine.KaineComboBox();
+            this.devolaComboBox2 = new Devola.DevolaComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // kaineFormStyle1
+            // devolaFormStyle1
             // 
-            this.kaineFormStyle1.AllowUserResize = false;
-            this.kaineFormStyle1.BackColor = System.Drawing.Color.Black;
-            this.kaineFormStyle1.ControlBoxButtonsWidth = 24;
-            this.kaineFormStyle1.Form = this;
-            this.kaineFormStyle1.FormStyle = Kaine.KaineFormStyle.fStyle.Telegram;
-            this.kaineFormStyle1.HeaderColor = System.Drawing.Color.Black;
-            this.kaineFormStyle1.HeaderHeight = 20;
-            this.kaineFormStyle1.HeaderHorizontalAlignment = System.Drawing.StringAlignment.Center;
-            this.kaineFormStyle1.HeaderImage = null;
-            this.kaineFormStyle1.HeaderTextColor = System.Drawing.Color.White;
-            this.kaineFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.kaineFormStyle1.HeaderVerticalAlignment = System.Drawing.StringAlignment.Center;
-            this.kaineFormStyle1.ShowMaximizeButton = false;
-            this.kaineFormStyle1.ShowMinimizeButton = true;
+            this.devolaFormStyle1.AllowUserResize = false;
+            this.devolaFormStyle1.BackColor = System.Drawing.Color.Black;
+            this.devolaFormStyle1.ControlBoxButtonsWidth = 24;
+            this.devolaFormStyle1.Form = this;
+            this.devolaFormStyle1.FormStyle = Devola.DevolaFormStyle.fStyle.Telegram;
+            this.devolaFormStyle1.HeaderColor = System.Drawing.Color.Black;
+            this.devolaFormStyle1.HeaderHeight = 20;
+            this.devolaFormStyle1.HeaderHorizontalAlignment = System.Drawing.StringAlignment.Center;
+            this.devolaFormStyle1.HeaderImage = null;
+            this.devolaFormStyle1.HeaderTextColor = System.Drawing.Color.White;
+            this.devolaFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.devolaFormStyle1.HeaderVerticalAlignment = System.Drawing.StringAlignment.Center;
+            this.devolaFormStyle1.ShowMaximizeButton = false;
+            this.devolaFormStyle1.ShowMinimizeButton = true;
             // 
             // label1
             // 
@@ -72,24 +72,24 @@ namespace Kaine
             this.label1.TabIndex = 0;
             this.label1.Text = "Network Size (affects packet cache size)";
             // 
-            // kaineComboBox1
+            // devolaComboBox1
             // 
-            this.kaineComboBox1.BackColor = System.Drawing.Color.Black;
-            this.kaineComboBox1.BorderColor = System.Drawing.Color.White;
-            this.kaineComboBox1.BorderSize = 1;
-            this.kaineComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.kaineComboBox1.ForeColor = System.Drawing.Color.White;
-            this.kaineComboBox1.IconColor = System.Drawing.Color.White;
-            this.kaineComboBox1.ListBackColor = System.Drawing.Color.Black;
-            this.kaineComboBox1.ListForeColor = System.Drawing.Color.White;
-            this.kaineComboBox1.Location = new System.Drawing.Point(309, 67);
-            this.kaineComboBox1.MinimumSize = new System.Drawing.Size(200, 30);
-            this.kaineComboBox1.Name = "kaineComboBox1";
-            this.kaineComboBox1.Padding = new System.Windows.Forms.Padding(1);
-            this.kaineComboBox1.Size = new System.Drawing.Size(213, 30);
-            this.kaineComboBox1.TabIndex = 1;
-            this.kaineComboBox1.Texts = "";
-            this.kaineComboBox1.OnSelectedIndexChanged += new System.EventHandler(this.kaineComboBox1_OnSelectedIndexChanged);
+            this.devolaComboBox1.BackColor = System.Drawing.Color.Black;
+            this.devolaComboBox1.BorderColor = System.Drawing.Color.White;
+            this.devolaComboBox1.BorderSize = 1;
+            this.devolaComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.devolaComboBox1.ForeColor = System.Drawing.Color.White;
+            this.devolaComboBox1.IconColor = System.Drawing.Color.White;
+            this.devolaComboBox1.ListBackColor = System.Drawing.Color.Black;
+            this.devolaComboBox1.ListForeColor = System.Drawing.Color.White;
+            this.devolaComboBox1.Location = new System.Drawing.Point(309, 67);
+            this.devolaComboBox1.MinimumSize = new System.Drawing.Size(200, 30);
+            this.devolaComboBox1.Name = "devolaComboBox1";
+            this.devolaComboBox1.Padding = new System.Windows.Forms.Padding(1);
+            this.devolaComboBox1.Size = new System.Drawing.Size(213, 30);
+            this.devolaComboBox1.TabIndex = 1;
+            this.devolaComboBox1.Texts = "";
+            this.devolaComboBox1.OnSelectedIndexChanged += new System.EventHandler(this.devolaComboBox1_OnSelectedIndexChanged);
             // 
             // label2
             // 
@@ -102,24 +102,24 @@ namespace Kaine
             this.label2.TabIndex = 2;
             this.label2.Text = "Check ARP Entries Interval (seconds)";
             // 
-            // kaineComboBox2
+            // devolaComboBox2
             // 
-            this.kaineComboBox2.BackColor = System.Drawing.Color.Black;
-            this.kaineComboBox2.BorderColor = System.Drawing.Color.White;
-            this.kaineComboBox2.BorderSize = 1;
-            this.kaineComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.kaineComboBox2.ForeColor = System.Drawing.Color.White;
-            this.kaineComboBox2.IconColor = System.Drawing.Color.White;
-            this.kaineComboBox2.ListBackColor = System.Drawing.Color.Black;
-            this.kaineComboBox2.ListForeColor = System.Drawing.Color.White;
-            this.kaineComboBox2.Location = new System.Drawing.Point(309, 117);
-            this.kaineComboBox2.MinimumSize = new System.Drawing.Size(200, 30);
-            this.kaineComboBox2.Name = "kaineComboBox2";
-            this.kaineComboBox2.Padding = new System.Windows.Forms.Padding(1);
-            this.kaineComboBox2.Size = new System.Drawing.Size(213, 30);
-            this.kaineComboBox2.TabIndex = 3;
-            this.kaineComboBox2.Texts = "";
-            this.kaineComboBox2.OnSelectedIndexChanged += new System.EventHandler(this.kaineComboBox2_OnSelectedIndexChanged);
+            this.devolaComboBox2.BackColor = System.Drawing.Color.Black;
+            this.devolaComboBox2.BorderColor = System.Drawing.Color.White;
+            this.devolaComboBox2.BorderSize = 1;
+            this.devolaComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.devolaComboBox2.ForeColor = System.Drawing.Color.White;
+            this.devolaComboBox2.IconColor = System.Drawing.Color.White;
+            this.devolaComboBox2.ListBackColor = System.Drawing.Color.Black;
+            this.devolaComboBox2.ListForeColor = System.Drawing.Color.White;
+            this.devolaComboBox2.Location = new System.Drawing.Point(309, 117);
+            this.devolaComboBox2.MinimumSize = new System.Drawing.Size(200, 30);
+            this.devolaComboBox2.Name = "devolaComboBox2";
+            this.devolaComboBox2.Padding = new System.Windows.Forms.Padding(1);
+            this.devolaComboBox2.Size = new System.Drawing.Size(213, 30);
+            this.devolaComboBox2.TabIndex = 3;
+            this.devolaComboBox2.Texts = "";
+            this.devolaComboBox2.OnSelectedIndexChanged += new System.EventHandler(this.devolaComboBox2_OnSelectedIndexChanged);
             // 
             // label3
             // 
@@ -162,18 +162,18 @@ namespace Kaine
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.kaineComboBox2);
+            this.Controls.Add(this.devolaComboBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.kaineComboBox1);
+            this.Controls.Add(this.devolaComboBox1);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(100, 50);
             this.Name = "SettingsForm";
-            this.MaximizeBox = false;
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.SettingsForm_OnPaint);
             this.Text = "Settings";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.SettingsForm_OnPaint);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,12 +181,12 @@ namespace Kaine
 
         #endregion
 
-        private KaineFormStyle kaineFormStyle1;
+        private DevolaFormStyle devolaFormStyle1;
         private System.Windows.Forms.Label label1;
-        private KaineComboBox kaineComboBox1;
+        private DevolaComboBox devolaComboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private KaineComboBox kaineComboBox2;
+        private DevolaComboBox devolaComboBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label4;
     }

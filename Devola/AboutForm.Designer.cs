@@ -1,5 +1,5 @@
 ﻿
-namespace Kaine
+namespace Devola
 {
     partial class AboutForm
     {
@@ -31,7 +31,7 @@ namespace Kaine
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.kaineFormStyle1 = new Kaine.KaineFormStyle(this.components);
+            this.devolaFormStyle1 = new Devola.DevolaFormStyle(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,19 +44,22 @@ namespace Kaine
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // kaineFormStyle1
+            // devolaFormStyle1
             // 
-            this.kaineFormStyle1.AllowUserResize = false;
-            this.kaineFormStyle1.BackColor = System.Drawing.Color.Black;
-            this.kaineFormStyle1.ControlBoxButtonsWidth = 24;
-            this.kaineFormStyle1.Form = this;
-            this.kaineFormStyle1.FormStyle = Kaine.KaineFormStyle.fStyle.Telegram;
-            this.kaineFormStyle1.HeaderColor = System.Drawing.Color.Black;
-            this.kaineFormStyle1.HeaderHeight = 20;
-            this.kaineFormStyle1.HeaderImage = null;
-            this.kaineFormStyle1.HeaderTextColor = System.Drawing.Color.White;
-            this.kaineFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.kaineFormStyle1.ShowMaximizeButton = false;
+            this.devolaFormStyle1.AllowUserResize = false;
+            this.devolaFormStyle1.BackColor = System.Drawing.Color.Black;
+            this.devolaFormStyle1.ControlBoxButtonsWidth = 24;
+            this.devolaFormStyle1.Form = this;
+            this.devolaFormStyle1.FormStyle = Devola.DevolaFormStyle.fStyle.Telegram;
+            this.devolaFormStyle1.HeaderColor = System.Drawing.Color.Black;
+            this.devolaFormStyle1.HeaderHeight = 20;
+            this.devolaFormStyle1.HeaderHorizontalAlignment = System.Drawing.StringAlignment.Center;
+            this.devolaFormStyle1.HeaderImage = null;
+            this.devolaFormStyle1.HeaderTextColor = System.Drawing.Color.White;
+            this.devolaFormStyle1.HeaderTextFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.devolaFormStyle1.HeaderVerticalAlignment = System.Drawing.StringAlignment.Center;
+            this.devolaFormStyle1.ShowMaximizeButton = false;
+            this.devolaFormStyle1.ShowMinimizeButton = true;
             // 
             // label1
             // 
@@ -76,9 +79,9 @@ namespace Kaine
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 17);
+            this.label2.Size = new System.Drawing.Size(139, 17);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Kainé version 0.2 beta";
+            this.label2.Text = "Devola version 1.0";
             // 
             // label3
             // 
@@ -178,11 +181,11 @@ namespace Kaine
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(100, 50);
             this.Name = "AboutForm";
-            this.MaximizeBox = false;
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AboutForm_OnPaint);
             this.Text = "About";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AboutForm_OnPaint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -191,7 +194,7 @@ namespace Kaine
 
         #endregion
 
-        private KaineFormStyle kaineFormStyle1;
+        private DevolaFormStyle devolaFormStyle1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

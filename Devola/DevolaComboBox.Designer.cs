@@ -1,7 +1,7 @@
 ﻿
-namespace Kaine
+namespace Devola
 {
-    partial class KaineComboBox
+    partial class DevolaComboBox
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

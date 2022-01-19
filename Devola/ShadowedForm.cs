@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Kaine
+namespace Devola
 {
     public partial class ShadowedForm : Form
     {

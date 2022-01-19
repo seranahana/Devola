@@ -9,9 +9,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 
-namespace Kaine
+namespace Devola
 {
-    public partial class KaineFormStyle : Component
+    public partial class DevolaFormStyle : Component
     {
         #region -- Свойства --
         public Form Form { get; set; }
@@ -109,15 +109,14 @@ namespace Kaine
         private bool FormNeedReposition = false;
 
         #endregion
-        public KaineFormStyle()
+        public DevolaFormStyle()
         {
             InitializeComponent();
         }
 
-        public KaineFormStyle(IContainer container)
+        public DevolaFormStyle(IContainer container)
         {
             container.Add(this);
-
             InitializeComponent();
         }
         public void ApplyStyle()

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Kaine
+namespace Devola
 {
     public static class FlatColors
     {
