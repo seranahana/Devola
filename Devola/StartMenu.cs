@@ -442,6 +442,8 @@ namespace Devola
         #region --Utilities--
         private void SpoofingsSignsFound()
         {
+            ProtectionButton_Click(null, new EventArgs());
+            ProtectionButton.Invalidate();
             MessageBox.Show("Tool has spotted signs of ARP Spoofing. Network interface will be disabled to prevent further damage", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             OutputText("Attempting to disable network interface " + Interfaces[devIndex - 1].FriendlyName);
             try
@@ -452,8 +454,6 @@ namespace Devola
             {
                 OutputText("Cannot disable interface: " + e.Message + ". Manual disabling advised");
             }
-            ProtectionButton_Click(null, new EventArgs());
-            ProtectionButton.Invalidate();
         }
         private void DisableInterface (string interfaceName)
         {
