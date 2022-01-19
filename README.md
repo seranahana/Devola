@@ -1,5 +1,5 @@
-# Kaine
-Kaine - ARP Spoofing Detection Tool v0.2 beta
+# Devola
+Devola - ARP Spoofing Detection Tool v0.2 beta
 
 Not actually the best, but open-source and, hey, i'm only a beginner!
 
