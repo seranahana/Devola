@@ -10,7 +10,7 @@ Has four main features:
 - Disables interfaces which is under ARP Spoofing attack
 - Obtains and checks Windows ARP Table for abnormalities
 
-Contibution to Egolds as I used his code in kaineFormStyle control
+Contibution to Egolds as I used his code in DevolaFormStyle control
 
 and to Yoko Taro as the name given to this tool belongs to his character
 
