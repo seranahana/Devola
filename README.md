@@ -10,6 +10,8 @@ Has four main features:
 - Disables interfaces which is under ARP Spoofing attack
 - Obtains and checks Windows ARP Table for abnormalities
 
+Interface language: English
+
 Installation: download and install DevolaSetup.msi. WinPCap v4.1.3 included in this package (tool won't run without it!)
 
 Contibution to Egolds as I used his code in DevolaFormStyle control
