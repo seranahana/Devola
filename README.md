@@ -1,5 +1,5 @@
 # Devola
-Devola - ARP Spoofing Detection Tool v0.2 beta
+Devola - ARP Spoofing Detection Tool v1.0
 
 Not actually the best, but open-source and, hey, i'm only a beginner!
 
