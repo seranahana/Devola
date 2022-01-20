@@ -47,6 +47,7 @@ namespace Devola
         public StartMenu()
         {
             InitializeComponent();
+            ProtectionButton.isProtectionButton = true;
             try
             {
                 LogPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Logs";
